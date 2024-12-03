@@ -6,6 +6,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+import CandidateTable from "./components/CandidateTable";
 
 import "./tailwind.css";
 
@@ -22,24 +23,39 @@ export const links: LinksFunction = () => [
   },
 ];
 
+const mockCandidates = [
+  {
+    name: "Marine Senechal",
+    location: "Perpignan",
+    position: "Développeuse",
+    employer: "Kalent",
+    status: "Retenue",
+  },
+];
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <div className="flex justify-center items-center h-screen ">
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+        </div>
       </body>
     </html>
   );
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+   <Layout>
+      <Outlet />
+    </Layout>
+  );
 }
